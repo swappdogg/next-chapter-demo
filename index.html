@@ -65,7 +65,10 @@ textarea.field{height:auto;min-height:84px;padding:12px 16px;resize:vertical}
 .spice{display:flex;gap:6px}
 .spice button{flex:1;min-height:46px;border-radius:14px;border:2px solid var(--line);background:var(--card);font-size:15px;font-weight:800;padding:0}
 .spice button.sel{background:var(--soft);border-color:var(--label);color:var(--onSoft)}
-input[type=range]{width:100%;accent-color:var(--label);height:32px}
+input[type=range]{width:100%;accent-color:var(--label);height:40px}
+.bigStars{font-size:34px;letter-spacing:2px;color:var(--star);line-height:1;min-height:36px}
+.moreBtn{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:48px;padding:0 4px;border:0;border-top:2px solid var(--line);background:none;font-weight:800;font-size:15px;color:var(--ink)}
+.moreBtn span{color:var(--muted);font-size:20px;line-height:1}
 .empty{font-size:16px;font-weight:700;color:var(--muted);line-height:1.4}
 .hint{background:var(--card);border:2px dashed var(--line);border-radius:20px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;font-weight:700;line-height:1.4}
 .hint>button{flex-shrink:0;min-height:40px;padding:0 12px;border-radius:12px;border:0;background:var(--btn);color:var(--btnInk);font-weight:800}
@@ -94,13 +97,7 @@ nav.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padd
 .sw{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 4px 10px;border-radius:16px;border:2.5px solid var(--line);background:var(--card);font-weight:800;font-size:12px;line-height:1.2;text-align:center}
 .sw.sel{border-color:var(--label)}
 .sw i{display:block;width:100%;height:38px;border-radius:10px}
-.accents{display:flex;flex-wrap:wrap;gap:10px}
-.ac{position:relative;width:44px;height:44px;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 2px var(--line);padding:0}
-.ac.sel{box-shadow:0 0 0 3px var(--ink)}
-.ac.pick{display:flex;align-items:center;justify-content:center;background:conic-gradient(#E0457B,#F2A33A,#E9D54A,#4FB477,#3E8ED8,#7B5CD6,#E0457B);overflow:hidden}
-.ac.pick b{width:22px;height:22px;border-radius:50%;background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1}
-.ac.pick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}
-.sub{font-size:15px;font-weight:800;margin:0}
+
 .note{font-size:14px;font-weight:600;color:var(--muted);line-height:1.45;margin:0}
 .demoBar{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:var(--cardB);border-radius:16px;padding:10px 14px;font-size:14px;font-weight:700;box-shadow:var(--shadow)}
 .demoBar a{font-weight:800;color:var(--label);white-space:nowrap}
@@ -108,7 +105,7 @@ nav.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padd
 .upsell ul{margin:0;padding-left:20px;font-weight:700}
 .toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font-weight:800;font-size:15px;z-index:30;max-width:90%;text-align:center}
 .quick{display:flex;gap:8px;flex-wrap:wrap}
-.quick button{min-height:44px;padding:0 14px;border-radius:999px;border:2px solid var(--line);background:var(--card);font-weight:800}
+.quick button{flex:1;min-height:44px;padding:0 8px;border-radius:999px;border:2px solid var(--line);background:var(--card);font-weight:800}
 .quick button.sel{background:var(--soft);border-color:var(--label);color:var(--onSoft)}
 </style>
 <!-- Cloudflare Web Analytics: paste your beacon script here -->
@@ -125,7 +122,7 @@ nav.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padd
 
   <div class="demoBar demoOnly" id="demoBar"><span id="demoLeft"></span><a class="fullLink" href="#" target="_blank" rel="noopener">Get full version</a></div>
   <div class="upsell demoOnly hide" id="upsell"><b style="font-size:17px">That’s the <span class="demoN"></span> free books in the demo.</b><span>The full version keeps going:</span>
-    <ul><li>Unlimited books, series and stats</li><li>Import your whole Goodreads or StoryGraph library</li><li>Three looks: Paper, Romantasy, Sage</li><li>One-time purchase, no subscription, no account</li></ul>
+    <ul><li>Unlimited books, series and stats</li><li>Import your whole Goodreads or StoryGraph library</li><li>All 8 color themes</li><li>One-time purchase, no subscription, no account</li></ul>
     <a class="btn fullLink" href="#" target="_blank" rel="noopener">Get the full version</a></div>
 
   <section id="v-now">
@@ -177,31 +174,27 @@ nav.tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padd
 <div class="sheetWrap hide" id="sheetWrap">
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <div class="between" style="align-items:center"><h1 id="sheetTitle" style="font-size:26px">Settings</h1><button class="iconBtn closeBtn" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-    <h2>Bring your library</h2>
-    <p class="note">Leaving Goodreads or StoryGraph? Export your library as a CSV there, then pick the file here. Ratings, shelves, dates and series come with it.</p>
-    <button class="btn" id="csvBtn" type="button">Import Goodreads or StoryGraph CSV</button>
-    <p class="note">Goodreads: My Books → Import and export → Export library. StoryGraph: Manage account → Export StoryGraph library.</p>
     <h2>Look</h2>
     <div class="themes" id="themes"></div>
-    <p class="sub">Make your own</p>
-    <div class="chips" id="baseChips"><button class="chip" data-base="light" type="button">Light</button><button class="chip" data-base="tint" type="button">Tinted</button><button class="chip" data-base="dark" type="button">Dark</button></div>
-    <div class="accents" id="accents"></div>
     <h2>Spice rating</h2>
     <div class="chips" id="spiceToggle"><button class="chip" data-sp="1" type="button">Show</button><button class="chip" data-sp="0" type="button">Hide</button></div>
     <h2>Backup</h2>
-    <p class="note">Your books live only on this device. No account, nothing uploaded. Save a backup file now and then, so a new phone never costs you your library.</p>
+    <p class="note">Your books stay on this phone. Save a backup now and then so a new phone never loses them.</p>
     <p class="note" id="lastBackup"></p>
     <button class="btn" id="exportBtn" type="button">Save backup file</button>
     <button class="lineBtn" id="importBtn" type="button">Restore from backup file</button>
+    <h2>Bring your Goodreads or StoryGraph books</h2>
+    <p class="note">Export your library as a CSV file there, then pick it here. Ratings, shelves and series come with it.</p>
+    <button class="lineBtn" id="csvBtn" type="button">Import CSV file</button>
     <h2>Put it on your home screen</h2>
     <p class="note" id="installNote"></p>
     <button class="btn hide" id="installBtn" type="button">Install app</button>
-    <h2>Sample data</h2>
+    <h2>Sample books</h2>
     <button class="lineBtn" id="sampleBtn2" type="button">Load sample books</button>
     <p class="note demoOnly">Bought the full version? Save a backup here, then use Restore in the full app. Your books carry over.</p>
     <h2>Start over</h2>
     <button class="lineBtn" id="eraseBtn" type="button">Erase everything on this device</button>
-    <p class="note" style="text-align:center">Next Chapter by ClipboardWorks · v1.1</p>
+    <p class="note" style="text-align:center">Next Chapter by ClipboardWorks · v1.3</p>
   </div>
 </div>
 
@@ -228,7 +221,7 @@ const FK=Object.keys(FMT);
 const FMT_C={print:'var(--bar)',ebook:'var(--soft)',audio:'var(--star)'};
 const MOODS=['Cozy','Romantic','Dark','Funny','Emotional','Tense','Adventurous','Hopeful','Mind-bending','Slow burn'];
 const SPINES=['#9C3D54','#3F7A5A','#5B4B8A','#C0763A','#2F6C8F','#8A3F74','#6B7A3A','#B0484A'];
-const DEF={v:1,theme:'sorbet',custom:{base:'tint',accent:'#D6457A'},spice:true,goal:24,books:[],hintSeen:false,lastBackup:null,demoUsed:0,created:null};
+const DEF={v:1,theme:'sorbet',spice:true,goal:24,books:[],hintSeen:false,lastBackup:null,demoUsed:0,created:null};
 
 // ---- palettes ----
 const THEMES={
@@ -241,7 +234,6 @@ const THEMES={
  academia:{name:'Dark Academia',base:'dark',accent:'#C9A15B',ink:'#F1E8DC',dbg:'#1D1814'},
  midnight:{name:'Midnight',base:'dark',accent:'#7FA8F0',dbg:'#121826'}
 };
-const ACCENTS=['#D6457A','#B0484A','#E0703C','#C9922E','#5E8C3A','#2F8A6B','#2A7A96','#3E6FC4','#7A5AC8','#9C3D54'];
 const hx=h=>{h=h.replace('#','');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))};
 const toHex=a=>'#'+a.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('').toUpperCase();
 const mix=(a,b,t)=>{const A=hx(a),B=hx(b);return toHex(A.map((v,i)=>v*(1-t)+B[i]*t))};
@@ -265,23 +257,17 @@ function makeTheme(base,accent,o){
   return{bg,ink,muted:mix(ink,bg,.42),label,card:'#FFFFFF',cardB:'0 solid transparent',shadow:'0 10px 28px '+'rgba('+hx(ink).join(',')+',.07)',btn,btnInk:'#FFFFFF',
     soft,onSoft:ink,line:mix(bg,accent,.12),bar:label,barBg:mix(bg,accent,.1),tabbar:'#FFFFFF',tabSel:soft,tabInk:mix(ink,bg,.42),tabSelInk:ink,pill:'#FFFFFF',star:'#D9923A',hero:'#FFFFFF'}
 }
-function themeVars(key,custom){
-  if(key==='custom')return makeTheme(custom.base,custom.accent);
+function themeVars(key){
   const t=THEMES[key]||THEMES.sorbet;return t.v||makeTheme(t.base,t.accent,t);
 }
 function applyTheme(){
-  const v=themeVars(S.theme,S.custom),st=document.documentElement.style;
+  const v=themeVars(S.theme),st=document.documentElement.style;
   for(const k in v)st.setProperty('--'+k,v[k]);
   document.querySelector('meta[name=theme-color]').setAttribute('content',v.bg);
   document.documentElement.dataset.theme=S.theme;
 }
 function renderLook(){
   $('themes').innerHTML=Object.keys(THEMES).map(k=>{const v=themeVars(k);return '<button class="sw'+(S.theme===k?' sel':'')+'" data-t="'+k+'" type="button" aria-pressed="'+(S.theme===k)+'"><i style="background:linear-gradient(90deg,'+v.bg+' 0 34%,'+v.soft+' 34% 67%,'+v.label+' 67%);box-shadow:inset 0 0 0 1px '+v.line+'"></i>'+THEMES[k].name+'</button>'}).join('');
-  const cu=S.theme==='custom';
-  document.querySelectorAll('[data-base]').forEach(b=>{const on=cu&&S.custom.base===b.dataset.base;b.classList.toggle('sel',on);b.setAttribute('aria-pressed',on)});
-  const inList=ACCENTS.includes(S.custom.accent);
-  $('accents').innerHTML=ACCENTS.map(c=>'<button class="ac'+(cu&&S.custom.accent===c?' sel':'')+'" data-ac="'+c+'" type="button" style="background:'+c+'" aria-label="Accent '+c+'" aria-pressed="'+(cu&&S.custom.accent===c)+'"></button>').join('')
-   +'<label class="ac pick'+(cu&&!inList?' sel':'')+'" title="Any color"'+(cu&&!inList?' style="background:'+S.custom.accent+'"':'')+'><b aria-hidden="true">+</b><input type="color" id="acPick" value="'+(S.custom.accent||'#9C3D54').toLowerCase()+'" aria-label="Pick any accent color"></label>';
 }
 
 function cleanBook(b){
@@ -298,8 +284,7 @@ function cleanBook(b){
 function sanitize(d){
   const o=JSON.parse(JSON.stringify(DEF));
   if(!d||typeof d!=='object')return o;
-  if(d.theme==='custom'||Object.keys(THEMES).includes(d.theme))o.theme=d.theme;
-  if(d.custom&&typeof d.custom==='object'){if(['light','tint','dark'].includes(d.custom.base))o.custom.base=d.custom.base;if(/^#[0-9A-Fa-f]{6}$/.test(d.custom.accent))o.custom.accent=d.custom.accent.toUpperCase()}
+  if(Object.keys(THEMES).includes(d.theme))o.theme=d.theme;
   if(typeof d.spice==='boolean')o.spice=d.spice;
   o.goal=Math.max(1,Math.min(999,Math.round(num(d.goal,999))||24));
   if(Array.isArray(d.books))o.books=d.books.map(cleanBook).filter(Boolean).slice(0,5000);
@@ -407,9 +392,9 @@ function renderStats(){
 }
 
 // ---- book sheet ----
-let editId=null,draft=null;
+let editId=null,draft=null,moreOpen=false;
 function openDlg(html){$('dlg').innerHTML=html;$('dlgWrap').classList.remove('hide');const f=$('dlg').querySelector('[autofocus]')||$('dlg').querySelector('.closeBtn');if(f)f.focus()}
-function closeDlg(){$('dlgWrap').classList.add('hide');$('dlg').innerHTML='';editId=null;draft=null}
+function closeDlg(){$('dlgWrap').classList.add('hide');$('dlg').innerHTML='';editId=null;draft=null;fin=null;finId=null}
 const closeX='<button class="iconBtn closeBtn" type="button" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
 
 function openBook(id,preset){
@@ -418,6 +403,7 @@ function openBook(id,preset){
   editId=b?b.id:null;
   draft=JSON.parse(JSON.stringify(b||{title:'',author:'',format:'print',total:0,at:0,series:'',seriesNo:0,genre:'',status:'reading',started:'',finished:'',rating:0,spice:0,moods:[],note:'',sessions:[]}));
   if(preset)Object.assign(draft,preset);
+  moreOpen=!!(b&&(b.series||b.genre||b.format!=='print'||b.total));
   drawBook();
 }
 function drawBook(){
@@ -426,12 +412,15 @@ function drawBook(){
   openDlg('<div class="between" style="align-items:center"><h1 id="dlgTitle" style="font-size:26px">'+(editId?'Edit book':'Add a book')+'</h1>'+closeX+'</div>'+
   '<label class="fl">Title<input class="field" id="fTitle" maxlength="160" value="'+esc(d.title)+'" autocomplete="off" '+(editId?'':'autofocus')+'></label>'+
   '<label class="fl">Author<input class="field" id="fAuthor" maxlength="100" value="'+esc(d.author)+'" autocomplete="off"></label>'+
+  '<div class="fl">Shelf<div class="chips" id="fStatus">'+SK.map(k=>'<button type="button" class="chip'+(d.status===k?' sel':'')+'" data-st="'+k+'" aria-pressed="'+(d.status===k)+'">'+STATUS[k]+'</button>').join('')+'</div></div>'+
+  '<button type="button" class="moreBtn" id="moreBtn" aria-expanded="'+moreOpen+'">'+(moreOpen?'Fewer details':'Add details: pages, series, genre')+'<span aria-hidden="true">'+(moreOpen?'−':'+')+'</span></button>'+
+  '<div class="stack'+(moreOpen?'':' hide')+'" id="moreBox" style="gap:16px">'+
   '<div class="fl">Format<div class="chips" id="fFormat">'+FK.map(k=>'<button type="button" class="chip'+(d.format===k?' sel':'')+'" data-fmt="'+k+'" aria-pressed="'+(d.format===k)+'">'+FMT[k]+'</button>').join('')+'</div></div>'+
   '<label class="fl">'+(d.format==='audio'?'Length in hours':'Pages')+'<input class="field" id="fTotal" inputmode="decimal" value="'+(d.total||'')+'" placeholder="'+(d.format==='audio'?'e.g. 11.5':'e.g. 384')+'"></label>'+
   '<div class="grid2"><label class="fl">Series<input class="field" id="fSeries" maxlength="80" value="'+esc(d.series)+'" list="seriesList" autocomplete="off" placeholder="Optional"></label><label class="fl">Book #<input class="field" id="fSeriesNo" inputmode="decimal" value="'+(d.seriesNo||'')+'" placeholder="1"></label></div>'+
   '<datalist id="seriesList">'+[...new Set(S.books.map(b=>b.series).filter(Boolean))].map(s=>'<option value="'+esc(s)+'">').join('')+'</datalist>'+
   '<label class="fl">Genre<input class="field" id="fGenre" maxlength="40" value="'+esc(d.genre)+'" list="genreList" autocomplete="off" placeholder="Romantasy, Thriller…"></label><datalist id="genreList">'+genres.map(g=>'<option value="'+esc(g)+'">').join('')+'</datalist>'+
-  '<div class="fl">Shelf<div class="chips" id="fStatus">'+SK.map(k=>'<button type="button" class="chip'+(d.status===k?' sel':'')+'" data-st="'+k+'" aria-pressed="'+(d.status===k)+'">'+STATUS[k]+'</button>').join('')+'</div></div>'+
+    '</div>'+
   (isEnd?'<label class="fl">'+(d.status==='read'?'Finished on':'Stopped on')+'<input class="field" id="fFinished" type="date" value="'+(d.finished||today())+'"></label>'+
     '<div class="card"><h2>'+(d.status==='read'?'Quick review':'Why you stopped (optional)')+'</h2>'+
     (d.status==='read'?'<div class="fl"><span>Rating <b id="rOut" style="color:var(--ink)">'+(d.rating?ratingLabel(d.rating)+' '+starsTxt(d.rating):'not rated')+'</b></span><input type="range" id="fRating" min="0" max="5" step="0.25" value="'+d.rating+'" aria-label="Rating in quarter stars"></div>'+
@@ -469,15 +458,46 @@ $('dlg').addEventListener('click',e=>{
   if(st&&draft){readForm();draft.status=st.dataset.st;drawBook();return}
   if(sp&&draft){readForm();draft.spice=+sp.dataset.spice;drawBook();return}
   if(md&&draft){readForm();const m=md.dataset.mood;draft.moods=draft.moods.includes(m)?draft.moods.filter(x=>x!==m):[...draft.moods,m].slice(0,6);drawBook();return}
+  if(e.target.closest('#moreBtn')&&draft){readForm();moreOpen=!moreOpen;drawBook();return}
+  const fs=e.target.closest('[data-fspice]'),fm=e.target.closest('[data-fmood]');
+  if(fs&&fin){readFinish();fin.spice=+fs.dataset.fspice;drawFinish();return}
+  if(fm&&fin){readFinish();const m=fm.dataset.fmood;fin.moods=fin.moods.includes(m)?fin.moods.filter(x=>x!==m):[...fin.moods,m].slice(0,6);drawFinish();return}
+  if(e.target.closest('#finMoreBtn')&&fin){readFinish();finMore=!finMore;drawFinish();return}
+  if(e.target.closest('#saveFinish')){saveFinish();return}
   if(e.target.closest('#saveBook')){saveBook();return}
   if(e.target.closest('#delBook')){const b=S.books.find(x=>x.id===editId);if(b&&confirm('Delete “'+b.title+'”?')){S.books=S.books.filter(x=>x!==b);closeDlg();save();toast('Deleted')}return}
-  if(q){$('pMins').value=q.dataset.q;document.querySelectorAll('[data-q]').forEach(b=>{b.classList.toggle('sel',b===q);b.setAttribute('aria-pressed',b===q)});return}
+  if(q){const on=!q.classList.contains('sel');$('pMins').value=on?q.dataset.q:'';document.querySelectorAll('[data-q]').forEach(b=>{const x=on&&b===q;b.classList.toggle('sel',x);b.setAttribute('aria-pressed',x)});return}
   if(e.target.closest('#saveProg')){saveProg();return}
-  if(e.target.closest('#progFinish')){const id=progId;closeDlg();openBook(id,{status:'read',finished:today()});return}
-  if(e.target.closest('#progDnf')){const id=progId;saveProg(true);openBook(id,{status:'dnf',finished:today()});return}
+  if(e.target.closest('#progFinish')){const id=progId;saveProg(true);closeDlg();openFinish(id);return}
+  if(e.target.closest('#progDnf')){const b=S.books.find(x=>x.id===progId);saveProg(true);if(b){b.status='dnf';b.finished=today()}closeDlg();save();toast('Moved to Did not finish');return}
 });
-$('dlg').addEventListener('input',e=>{if(e.target.id==='fRating'){const r=+e.target.value;$('rOut').textContent=r?ratingLabel(r)+' '+starsTxt(r):'not rated'}});
+$('dlg').addEventListener('input',e=>{if(e.target.id==='fRating'){const r=+e.target.value;if($('bigStars')){$('bigStars').textContent=starsTxt(r)||'☆☆☆☆☆';$('rOut').textContent=r?ratingLabel(r):''}else $('rOut').textContent=r?ratingLabel(r)+' '+starsTxt(r):'not rated'}});
 $('dlgWrap').addEventListener('click',e=>{if(e.target===$('dlgWrap'))closeDlg()});
+
+// ---- finish sheet ----
+let finId=null,fin=null,finMore=false;
+function openFinish(id){
+  const b=S.books.find(x=>x.id===id);if(!b)return;finId=id;
+  fin={rating:b.rating||0,spice:b.spice||0,moods:[...b.moods],note:b.note||''};finMore=false;drawFinish();
+}
+function drawFinish(){
+  const b=S.books.find(x=>x.id===finId);if(!b)return;
+  openDlg('<div class="between" style="align-items:center"><h1 id="dlgTitle" style="font-size:26px">You finished it</h1>'+closeX+'</div>'+
+  '<p class="note" style="font-size:16px;color:var(--ink);font-weight:800">'+esc(b.title)+'</p>'+
+  '<div class="fl"><span>How was it? <b id="rOut" style="color:var(--ink)">'+(fin.rating?ratingLabel(fin.rating):'')+'</b></span><div class="bigStars" id="bigStars" aria-hidden="true">'+(starsTxt(fin.rating)||'☆☆☆☆☆')+'</div><input type="range" id="fRating" min="0" max="5" step="0.25" value="'+fin.rating+'" aria-label="Rating in quarter stars"></div>'+
+  (S.spice?'<div class="fl">Spice<div class="spice" id="fSpice">'+[0,1,2,3,4,5].map(n=>'<button type="button" data-fspice="'+n+'" class="'+(fin.spice===n?'sel':'')+'" aria-pressed="'+(fin.spice===n)+'" aria-label="Spice '+n+'">'+(n?n+'🌶️':'None')+'</button>').join('')+'</div></div>':'')+
+  '<button type="button" class="moreBtn" id="finMoreBtn" aria-expanded="'+finMore+'">'+(finMore?'Hide moods and note':'Add moods and a note')+'<span aria-hidden="true">'+(finMore?'−':'+')+'</span></button>'+
+  '<div class="stack'+(finMore?'':' hide')+'" style="gap:16px"><div class="fl">Mood<div class="chips">'+MOODS.map(m=>'<button type="button" class="chip'+(fin.moods.includes(m)?' sel':'')+'" data-fmood="'+esc(m)+'" aria-pressed="'+fin.moods.includes(m)+'">'+esc(m)+'</button>').join('')+'</div></div>'+
+  '<label class="fl">Note<textarea class="field" id="finNote" maxlength="600" placeholder="One line you want to remember">'+esc(fin.note)+'</textarea></label></div>'+
+  '<button class="btn" type="button" id="saveFinish">Save</button>');
+}
+function readFinish(){if($('fRating'))fin.rating=+$('fRating').value;if($('finNote'))fin.note=$('finNote').value}
+function saveFinish(){
+  readFinish();const b=S.books.find(x=>x.id===finId);if(!b)return;
+  b.status='read';b.finished=today();if(!b.started)b.started=today();if(b.total)b.at=b.total;
+  b.rating=Math.round(fin.rating*4)/4;b.spice=fin.spice;b.moods=fin.moods.slice(0,6);b.note=fin.note.trim().slice(0,600);
+  finId=null;fin=null;closeDlg();save();toast('Another one read. Nice.');
+}
 
 // ---- progress sheet ----
 let progId=null;
@@ -485,11 +505,11 @@ function openProg(id){
   const b=S.books.find(x=>x.id===id);if(!b)return;progId=id;
   const au=b.format==='audio';
   openDlg('<div class="between" style="align-items:center"><h1 id="dlgTitle" style="font-size:24px">'+esc(b.title)+'</h1>'+closeX+'</div>'+
-  '<div class="grid2"><label class="fl">'+(au?'Hours listened':'Now on page')+'<input class="field" id="pAt" inputmode="decimal" value="'+(b.at?(au?+b.at.toFixed(2):Math.round(b.at)):'')+'" autofocus></label><label class="fl">'+(au?'Book length (h)':'Of pages')+'<input class="field" id="pTotal" inputmode="decimal" value="'+(b.total||'')+'"></label></div>'+
-  '<div class="fl">Minutes you read this time (optional)<div class="quick">'+[15,30,45,60].map(m=>'<button type="button" data-q="'+m+'" aria-pressed="false">'+m+' min</button>').join('')+'</div><input class="field" id="pMins" inputmode="numeric" placeholder="Or type minutes"></div>'+
-  '<button class="btn" type="button" id="saveProg">Save progress</button>'+
-  '<div class="row" style="justify-content:space-between"><button class="ghost" type="button" id="progFinish">I finished it</button><button class="ghost" type="button" id="progDnf">Stop reading (DNF)</button></div>'+
-  '<p class="note">DNF is a shelf here, not a failure. It shows in your stats so you can see what isn’t for you.</p>');
+  (b.total?'<label class="fl">'+(au?'Hours listened so far':'Page you’re on')+'<input class="field" id="pAt" inputmode="decimal" value="'+(b.at?(au?+b.at.toFixed(2):Math.round(b.at)):'')+'" autofocus><span>of '+(au?fmtH(b.total):Math.round(b.total)+' pages')+'</span></label><input type="hidden" id="pTotal" value="'+b.total+'">'
+   :'<div class="grid2"><label class="fl">'+(au?'Hours listened':'Page you’re on')+'<input class="field" id="pAt" inputmode="decimal" value="'+(b.at?(au?+b.at.toFixed(2):Math.round(b.at)):'')+'" autofocus></label><label class="fl">'+(au?'Length (h)':'Total pages')+'<input class="field" id="pTotal" inputmode="decimal" value=""></label></div>')+
+  '<div class="fl">How long did you read? (optional)<div class="quick">'+[15,30,45,60].map(m=>'<button type="button" data-q="'+m+'" aria-pressed="false">'+m+' min</button>').join('')+'</div><input type="hidden" id="pMins" value=""></div>'+
+  '<button class="btn" type="button" id="saveProg">Save</button>'+
+  '<div class="row" style="justify-content:space-between"><button class="ghost" type="button" id="progFinish">I finished it</button><button class="ghost" type="button" id="progDnf">Stop reading</button></div>');
 }
 function saveProg(silent){
   const b=S.books.find(x=>x.id===progId);if(!b)return;
@@ -503,7 +523,7 @@ function saveProg(silent){
 function clickBooks(e){
   const o=e.target.closest('[data-open]'),p=e.target.closest('[data-prog]'),fi=e.target.closest('[data-finish]'),st=e.target.closest('[data-start]');
   if(p)openProg(p.dataset.prog);
-  else if(fi)openBook(fi.dataset.finish,{status:'read',finished:today()});
+  else if(fi)openFinish(fi.dataset.finish);
   else if(st){const b=S.books.find(x=>x.id===st.dataset.start);if(b){b.status='reading';b.started=today();b.order=Date.now();save();toast('Started “'+b.title+'”')}}
   else if(o)openBook(o.dataset.open);
 }
@@ -522,9 +542,6 @@ $('menuBtn').addEventListener('click',openSheet);$('sheetWrap').querySelector('.
 $('sheetWrap').addEventListener('click',e=>{if(e.target===$('sheetWrap'))closeSheet()});
 document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;if(!$('dlgWrap').classList.contains('hide'))closeDlg();else if(!$('sheetWrap').classList.contains('hide'))closeSheet()});
 $('themes').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(!b)return;S.theme=b.dataset.t;save()});
-$('baseChips').addEventListener('click',e=>{const b=e.target.closest('[data-base]');if(!b)return;S.custom.base=b.dataset.base;S.theme='custom';save()});
-$('accents').addEventListener('click',e=>{const b=e.target.closest('[data-ac]');if(!b)return;S.custom.accent=b.dataset.ac;S.theme='custom';save()});
-$('accents').addEventListener('change',e=>{if(e.target.id!=='acPick')return;S.custom.accent=e.target.value.toUpperCase();S.theme='custom';save()});
 $('spiceToggle').addEventListener('click',e=>{const b=e.target.closest('[data-sp]');if(!b)return;S.spice=b.dataset.sp==='1';save()});
 
 // ---- backup ----
@@ -540,7 +557,7 @@ $('importFile').addEventListener('change',async e=>{const f=e.target.files[0];e.
     if(!confirm('Replace what’s on this device with the backup?'))return;
     const keepDemo=S.demoUsed;S=sanitize(d);if(DEMO){S.demoUsed=Math.max(S.demoUsed,keepDemo);if(S.books.length>DEMO_LIMIT){S.books=S.books.slice(0,DEMO_LIMIT);toast('Demo shows the first '+DEMO_LIMIT+' books')}}save();closeSheet();if(!DEMO)toast('Backup restored')}
   catch(err){toast('Could not read that file')}});
-$('eraseBtn').addEventListener('click',()=>{if(confirm('Erase every book on this device? Save a backup first if you might need them.')){const keepDemo=S.demoUsed,th=S.theme,cu=S.custom;localStorage.removeItem(KEY);S=sanitize({theme:th,custom:cu});if(DEMO)S.demoUsed=keepDemo;save();closeSheet();toast('Erased')}});
+$('eraseBtn').addEventListener('click',()=>{if(confirm('Erase every book on this device? Save a backup first if you might need them.')){const keepDemo=S.demoUsed,th=S.theme;localStorage.removeItem(KEY);S=sanitize({theme:th});if(DEMO)S.demoUsed=keepDemo;save();closeSheet();toast('Erased')}});
 
 // ---- Goodreads / StoryGraph CSV import ----
 function parseCSV(t){
@@ -615,7 +632,7 @@ function demoWall(){view='now';render();$('upsell').scrollIntoView({block:'cente
 function loadSample(){
   const y=new Date().getFullYear(),m=new Date().getMonth(),d=(mo,day)=>y+'-'+pad(Math.max(1,Math.min(mo,m+1)))+'-'+pad(day),o=Date.now();let i=0;
   const bk=(title,author,x)=>({title,author,order:o+(i++),...x});
-  S=sanitize({theme:S.theme,custom:S.custom,spice:S.spice,goal:10,hintSeen:true,demoUsed:S.demoUsed,books:[
+  S=sanitize({theme:S.theme,spice:S.spice,goal:10,hintSeen:true,demoUsed:S.demoUsed,books:[
     bk('Ember and Thorn','R. L. Vance',{series:'The Thornwood Court',seriesNo:1,status:'read',total:412,finished:d(1,14),rating:4.75,spice:3,moods:['Romantic','Adventurous','Tense'],genre:'Romantasy',note:'The library scene. That’s it, that’s the note.'}),
     bk('Crown of Ash','R. L. Vance',{series:'The Thornwood Court',seriesNo:2,status:'read',total:468,finished:d(2,3),rating:4.25,spice:4,moods:['Romantic','Dark'],genre:'Romantasy'}),
     bk('A Throne of Starlight','R. L. Vance',{series:'The Thornwood Court',seriesNo:3,status:'reading',total:520,at:233,started:today(),genre:'Romantasy',sessions:[{d:today(),m:40}]}),
